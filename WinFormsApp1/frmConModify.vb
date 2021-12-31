@@ -3,56 +3,8 @@
 Public Class frmConModify
 
 
-    Private Sub frmConModify_Load(sender As Object, e As EventArgs)
-        '删除临时库存记录
-        Dim tmyConn As OleDbConnection = New OleDbConnection(modMain.strConn)
-        Dim tmyComm As OleDbCommand = New OleDbCommand
-        tmyComm.Connection = tmyConn
-        tmyComm.CommandText = "delete * from stocktemp"
-        tmyConn.Open()
-        tmyComm.ExecuteNonQuery()
-        tmyConn.Close()
-        Dim myConn As OleDbConnection = New OleDbConnection(modMain.strConn)
-        Dim myuComm As OleDbCommand = New OleDbCommand
-        tmyComm.Connection = myConn
-        tmyComm.CommandText = "select id from contract where factor = false"
-        Dim myReader As OleDbDataReader
-        myConn.Open()
-        myReader = tmyComm.ExecuteReader()
-        While myReader.Read
-            cbConID.Items.add(myReader.GetInt32(0))
-        End While
-        myConn.Close()
-        Me.txtConSum.Enabled = False
-        Me.labConCustomerLevel.Text = ""
-        Me.txtConInprice.Enabled = False
-        '获取客户信息
-        Dim cmyComm As OleDbCommand = New OleDbCommand
-        cmyComm.Connection = myConn
-        cmyComm.CommandText = "Select Name from customer"
-        Dim cmyReader As OleDbDataReader
-        myConn.Open()
-        cmyReader = cmyComm.ExecuteReader()
-        While cmyReader.Read
-            cbConCustomer.Items.Add(cmyReader.GetString(0))
-        End While
-        myConn.Close()
-        '获取成品名称
-        Dim pmyConn As OleDbConnection = New OleDbConnection(modMain.strConn)
-        Dim pmyComm As OleDbCommand = New OleDbCommand
-        pmyComm.Connection = pmyConn
-        pmyComm.CommandText = "select name from product"
-        Dim pmyReader As OleDbDataReader
-        pmyConn.Open()
-        pmyReader = pmyComm.ExecuteReader()
-        While pmyReader.Read
-            cbStockProname.Items.Add(pmyReader.GetString(0))
-        End While
-        pmyConn.Close()
-    End Sub
 
-
-    Private Sub ComboBox3_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox3.SelectedIndexChanged
+    Private Sub cbConCustomer_SelectedIndexChanged(sender As Object, e As EventArgs)
         If Me.cbConCustomer.SelectedIndex = -1 Then
             Exit Sub
         End If
@@ -115,7 +67,7 @@ Public Class frmConModify
         End Try
     End Sub
 
-    Private Sub NumericUpDown1_ValueChanged(sender As Object, e As EventArgs) Handles NumericUpDown1.ValueChanged
+    Private Sub nubStockNumber_ValueChanged(sender As Object, e As EventArgs)
         If nubStockNumber.Value > 100000 Then
             MsgBox("超出数量限定！", MsgBoxStyle.Information, "提示信息")
             nubStockNumber.Value = 100000
@@ -127,11 +79,7 @@ Public Class frmConModify
         End If
     End Sub
 
-    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
-
-    End Sub
-
-    Private Sub cbConID_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbConID.SelectedIndexChanged
+    Private Sub cbConID_SelectedIndexChanged(sender As Object, e As EventArgs)
         If cbConID.SelectedIndex = -1 Then
             Exit Sub
         End If
@@ -178,11 +126,11 @@ Public Class frmConModify
         stockTempComm.CommandText = "insert into stocktemp(tindex , proname , tnumber , price ) values (@tindex,@proname,@tnumber,@price)"
         myConn.Open()
         For i = 0 To g - 1
-            stockTemp = stockTempComm + 1
+            ' stockTemp = stockTempComm + 1
             tProname = CStr(dgCon.Item(i, 0).ToString)
             tNumber = CLng(dgCon.Item(i, 1).ToString)
             tPrice = CSng(dgCon.Item(i, 2).ToString)
-            stockTempComm.Parameters.AddWithValue("@tindex", stockTemp)
+            'stockTempComm.Parameters.AddWithValue("@tindex", stockTemp)
             stockTempComm.Parameters.AddWithValue("@proname", tProname)
             stockTempComm.Parameters.AddWithValue("@tnumber", tNumber)
             stockTempComm.Parameters.AddWithValue("@price", tPrice)
@@ -194,5 +142,57 @@ Public Class frmConModify
             stockTempComm.Parameters.Clear()
         Next
         myConn.Close()
+    End Sub
+
+    Private Sub frmConModify_Load(sender As Object, e As EventArgs)
+        '删除临时库存记录
+        Dim tmyConn As OleDbConnection = New OleDbConnection(modMain.strConn)
+        Dim tmyComm As OleDbCommand = New OleDbCommand
+        tmyComm.Connection = tmyConn
+        tmyComm.CommandText = "delete * from stocktemp"
+        tmyConn.Open()
+        tmyComm.ExecuteNonQuery()
+        tmyConn.Close()
+        Dim myConn As OleDbConnection = New OleDbConnection(modMain.strConn)
+        Dim myuComm As OleDbCommand = New OleDbCommand
+        tmyComm.Connection = myConn
+        tmyComm.CommandText = "select id from contract where factor = false"
+        Dim myReader As OleDbDataReader
+        myConn.Open()
+        myReader = tmyComm.ExecuteReader()
+        While myReader.Read
+            cbConID.Items.Add(myReader.GetInt32(0))
+        End While
+        myConn.Close()
+        Me.txtConSum.Enabled = False
+        Me.labConCustomerLevel.Text = ""
+        Me.txtConInprice.Enabled = False
+        '获取客户信息
+        Dim cmyComm As OleDbCommand = New OleDbCommand
+        cmyComm.Connection = myConn
+        cmyComm.CommandText = "Select Name from customer"
+        Dim cmyReader As OleDbDataReader
+        myConn.Open()
+        cmyReader = cmyComm.ExecuteReader()
+        While cmyReader.Read
+            cbConCustomer.Items.Add(cmyReader.GetString(0))
+        End While
+        myConn.Close()
+        '获取成品名称
+        Dim pmyConn As OleDbConnection = New OleDbConnection(modMain.strConn)
+        Dim pmyComm As OleDbCommand = New OleDbCommand
+        pmyComm.Connection = pmyConn
+        pmyComm.CommandText = "select name from product"
+        Dim pmyReader As OleDbDataReader
+        pmyConn.Open()
+        pmyReader = pmyComm.ExecuteReader()
+        While pmyReader.Read
+            cbStockProname.Items.Add(pmyReader.GetString(0))
+        End While
+        pmyConn.Close()
+    End Sub
+
+    Private Sub GroupBox1_Enter(sender As Object, e As EventArgs) Handles GroupBox1.Enter
+
     End Sub
 End Class
