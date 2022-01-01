@@ -38,8 +38,8 @@ Partial Class frmConModify
         Me.label1 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.dgCon = New System.Windows.Forms.DataGridView()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.txtConInprice = New System.Windows.Forms.TextBox()
+        Me.txtStockPrice = New System.Windows.Forms.TextBox()
         Me.txtConSum = New System.Windows.Forms.TextBox()
         Me.nubStockNumber = New System.Windows.Forms.NumericUpDown()
         Me.cbStockProname = New System.Windows.Forms.ComboBox()
@@ -194,8 +194,8 @@ Partial Class frmConModify
         'GroupBox2
         '
         Me.GroupBox2.Controls.Add(Me.dgCon)
-        Me.GroupBox2.Controls.Add(Me.TextBox3)
         Me.GroupBox2.Controls.Add(Me.txtConInprice)
+        Me.GroupBox2.Controls.Add(Me.txtStockPrice)
         Me.GroupBox2.Controls.Add(Me.txtConSum)
         Me.GroupBox2.Controls.Add(Me.nubStockNumber)
         Me.GroupBox2.Controls.Add(Me.cbStockProname)
@@ -223,19 +223,19 @@ Partial Class frmConModify
         Me.dgCon.Size = New System.Drawing.Size(513, 173)
         Me.dgCon.TabIndex = 17
         '
-        'TextBox3
-        '
-        Me.TextBox3.Location = New System.Drawing.Point(613, 69)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(150, 30)
-        Me.TextBox3.TabIndex = 18
-        '
         'txtConInprice
         '
-        Me.txtConInprice.Location = New System.Drawing.Point(613, 29)
+        Me.txtConInprice.Location = New System.Drawing.Point(613, 69)
         Me.txtConInprice.Name = "txtConInprice"
         Me.txtConInprice.Size = New System.Drawing.Size(150, 30)
-        Me.txtConInprice.TabIndex = 17
+        Me.txtConInprice.TabIndex = 18
+        '
+        'txtStockPrice
+        '
+        Me.txtStockPrice.Location = New System.Drawing.Point(613, 29)
+        Me.txtStockPrice.Name = "txtStockPrice"
+        Me.txtStockPrice.Size = New System.Drawing.Size(150, 30)
+        Me.txtStockPrice.TabIndex = 17
         '
         'txtConSum
         '
@@ -400,8 +400,8 @@ Partial Class frmConModify
     Friend WithEvents Button6 As Button
     Friend WithEvents dtpCon As DateTimePicker
     Friend WithEvents cbStockProname As ComboBox
-    Friend WithEvents TextBox3 As TextBox
     Friend WithEvents txtConInprice As TextBox
+    Friend WithEvents txtStockPrice As TextBox
     Friend WithEvents txtConSum As TextBox
     Friend WithEvents nubStockNumber As NumericUpDown
     Friend WithEvents dgCon As DataGridView
