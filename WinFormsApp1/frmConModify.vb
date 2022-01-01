@@ -2,8 +2,6 @@
 
 Public Class frmConModify
 
-
-
     Private Sub cbConCustomer_SelectedIndexChanged(sender As Object, e As EventArgs)
         If Me.cbConCustomer.SelectedIndex = -1 Then
             Exit Sub
@@ -192,7 +190,4 @@ Public Class frmConModify
         pmyConn.Close()
     End Sub
 
-    Private Sub GroupBox1_Enter(sender As Object, e As EventArgs) Handles GroupBox1.Enter
-
-    End Sub
 End Class
